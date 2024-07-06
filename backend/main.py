@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from core.config import settings
-from db.session import engine
 
 
 def start_application():
@@ -10,4 +9,4 @@ app = start_application()
 
 @app.get("/")
 def hello():
-    return {"msg":"Hello "}
+    return {"msg":"Hello FASTAPI"}
