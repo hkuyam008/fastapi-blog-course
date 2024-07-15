@@ -3,7 +3,8 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from typing import Optional
 
-from db.repository.blog import list_blogs, retrieve_blog
+from apis.v1.route_blog import get_all_blogs
+from db.repository.blog import retrieve_blog
 from db.session import get_db
 
 templates = Jinja2Templates(directory="templates")
@@ -11,7 +12,7 @@ router = APIRouter()
 
 @router.get("/")
 def home(request: Request, alert :Optional[str] = None, db: Session = Depends(get_db)):
-    blogs = list_blogs(db)
+    blogs = get_all_blogs(db)
     context = {"request": request, "blogs": blogs, "alert": alert}
     return templates.TemplateResponse("blogs/home.html", context=context)
 
